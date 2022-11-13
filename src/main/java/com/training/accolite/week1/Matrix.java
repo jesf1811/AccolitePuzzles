@@ -8,7 +8,26 @@ public class Matrix {
 	private final Scanner sc;
 	
 	public int[][] solve(int[][] A) {
-	    // Write logic here...
+		int[][] resultantBoard = new int[A.length][A.length-1];
+
+		for (int i = 0; i < A.length; i++){
+		    for (int j = 0; j < A[i].length; j++){
+			int aliveCount = count(A, i, j, A.length,A[i].length);
+			if (A[i][j] == 0 && aliveCount == 3){
+			    resultantBoard[i][j] = 1;
+			} else if (A[i][j] == 1){
+			    if (aliveCount == 2 || aliveCount == 3){
+				resultantBoard[i][j] = 1;
+			    } else if (aliveCount < 2){
+				resultantBoard[i][j] = 0;
+			    } else {
+				resultantBoard[i][j] = 0;
+			    }
+			}
+		    }
+		}
+
+		return resultantBoard;
 	}
 
 	int dis[][]={{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
