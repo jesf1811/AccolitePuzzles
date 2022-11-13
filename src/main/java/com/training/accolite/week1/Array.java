@@ -46,10 +46,20 @@ public class Array {
             b[sc.nextInt()] = i;
         }
         
-        int ans = 0;
-        
-        // Write the logic here
-        
+        int ans = 0, max = 0;
+
+        for (int j : a) {
+            if (b[j] != 0) {
+                ans++;
+                if (max < ans){
+                    max = ans;
+                }
+            } else {
+                ans = 0;
+            }
+        }
+
+        ans = max;
         return ans;
     }
 
