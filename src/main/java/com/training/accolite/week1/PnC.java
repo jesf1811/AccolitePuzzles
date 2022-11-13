@@ -28,23 +28,50 @@ public class PnC {
         for(int i=0;i<=n;++i){
             int a = sc.nextInt();
             if(a==0) break;
-            ans = // complete the formula...
+            ans += C(i,a);
         }
         System.out.println(ans);
         return ans;
     }
-    
+	
+    /*
+        function to sum all the nCk where k is fixed and n <= n < n+k
+     */
     static int C(int n,int k){
-        // complete the formula...
+	int result = 0;
+	for (int i = n; i < (n+k); i++){
+		result += nCr(i,n);
+	}
+	return result;
     }
+	
+	
+    /*
+        function to calculate nCr
+     */
+    static int nCr (int n, int r){
+        return (f[n] / (factorial(r)  * factorial(n-r)));
+    }
+
+    /*
+        function to calculate n! (where n is the input)
+     */
+    static int factorial (int n){
+        if (n <= 1) {
+            return 1;
+        } else {
+            return n * factorial(n-1);
+        }
+    }
+	
+    /*
+        pre-calculates the factorial of numbers from 0 to max_n - 1
+     */
     static void prep(){
         f[0] = df[0] = 1;
         for(int i=1;i<max_n;++i){
             f[i] = (int)((1l*f[i-1]*i)%mod);
-            df[i] = power(f[i],mod-2);
         }
     }
-    static int power(int n,int k){
-    	// complete the formula...
-    }
+	
 }
