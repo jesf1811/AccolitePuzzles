@@ -1,9 +1,7 @@
 package com.training.accolite.week1;
 
 import java.util.*;
-import java.io.*;
-import java.math.*;
- 
+
 public class Array {
 	static long INF = (long)1e18;
     static int maxn = (int)1e6+5;
@@ -28,9 +26,6 @@ public class Array {
 		return result;
 	}
  
-    
-    
-    
     int solve() {
         int n = sc.nextInt();
         int m = sc.nextInt();
@@ -40,23 +35,37 @@ public class Array {
             a[i] = sc.nextInt();
             a[i+n] = a[i];
         }
-        
+
         int[] b = new int[maxn];
         for (int i = 1; i <= m; i++) {
             b[sc.nextInt()] = i;
         }
-        
-        int ans = 0, max = 0;
 
-        for (int j : a) {
-            if (b[j] != 0) {
+        int ans = 0;
+        /*
+            stores the longest substring possible
+         */
+        int max = 0;
+
+        /*
+            iterating through the first array
+         */
+        for (int i=1;i<a.length;i++) {
+            if (b[a[i]] == 0){
+                ans = 0;
+                continue;
+            }
+
+            if (b[a[i-1]] < b[a[i]]){
                 ans++;
-                if (max < ans){
-                    max = ans;
-                }
+            } else if (i == n + 1 && b[a[i-1]] > b[a[i]]){
+                ans++;
+            } else if (i != (a.length - 1) && b[a[i+1]] > b[a[i]]) {
+                ans++;
             } else {
                 ans = 0;
             }
+            max = Math.max(ans,max);
         }
 
         ans = max;
